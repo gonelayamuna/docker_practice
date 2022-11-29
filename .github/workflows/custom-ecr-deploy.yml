@@ -25,6 +25,7 @@
 #    and best practices on handling the access key credentials.
 
 name: Deploying to AWS ECR
+run: echo "GIT_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
 on:
   push:
@@ -61,7 +62,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: ${{ env.GIT_TAG }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
