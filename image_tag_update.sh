@@ -33,6 +33,7 @@ echo "Major : $VNUM1"
 echo "Minor : $VNUM2"
 if [[ $VERSION == 'major' ]]
 then
+  echo "VNUM1 is : $VNUM1"
   VNUM1=v$((VNUM1+1))
 elif [[ $VERSION == 'minor' ]]
 then
