@@ -22,7 +22,7 @@ VNUM2=${CURRENT_VERSION_PARTS[1]}
 if [[ $VERSION == 'major' ]]
 then
   echo "VNUM1 is : $VNUM1"
-  VNUM1_PARTS=(${VNUM1//v/})
+  VNUM1_PARTS=(${VNUM1//image/})
   echo "VNUM1 parts : ${VNUM1_PARTS[0]} "
   VNUM1_PART1=${VNUM1_PARTS[0]}
   VNUM1=$(($VNUM1_PART1+1))
