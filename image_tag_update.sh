@@ -35,8 +35,10 @@ if [[ $VERSION == 'major' ]]
 then
   echo "VNUM1 is : $VNUM1"
   VNUM1_PARTS=(${VNUM1//v/})
-  # echo "VNUM parts : ${VNUM1_PARTS[0]} , ${VNUM1_PARTS[1]} "
-  VNUM1=v$(($VNUM1_PARTS[0]+1))
+  echo "VNUM1 parts : ${VNUM1_PARTS[0]} "
+  VNUM1_PART1=${VNUM1_PARTS[0]}
+  VNUM1=v$(($VNUM1_PART1+1))
+  echo "Latest VNUM1 is : $VNUM1"
 elif [[ $VERSION == 'minor' ]]
 then
   VNUM2=$((VNUM2+1))
