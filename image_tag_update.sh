@@ -10,6 +10,8 @@ VERSION=""
 #   esac
 # done
 
+VERSION=$1
+
 # get highest tag number, and add v0.1.0 if doesn't exist
 git fetch --prune --unshallow 2>/dev/null
 CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
@@ -27,7 +29,8 @@ CURRENT_VERSION_PARTS=(${CURRENT_VERSION//./ })
 VNUM1=${CURRENT_VERSION_PARTS[0]}
 VNUM2=${CURRENT_VERSION_PARTS[1]}
 #VNUM3=${CURRENT_VERSION_PARTS[2]}
-
+echo "Major : $VNUM1"
+echo "Minor : $VNUM2"
 if [[ $VERSION == 'major' ]]
 then
   VNUM1=v$((VNUM1+1))
