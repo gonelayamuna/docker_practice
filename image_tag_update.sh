@@ -25,7 +25,7 @@ then
   VNUM1_PARTS=(${VNUM1//v/})
   echo "VNUM1 parts : ${VNUM1_PARTS[0]} "
   VNUM1_PART1=${VNUM1_PARTS[0]}
-  VNUM1=v$(($VNUM1_PART1+1))
+  VNUM1=$(($VNUM1_PART1+1))
   echo "Latest VNUM1 is : $VNUM1"
 elif [[ $VERSION == 'minor' ]]
 then
