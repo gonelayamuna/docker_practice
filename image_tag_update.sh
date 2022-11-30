@@ -34,6 +34,8 @@ echo "Minor : $VNUM2"
 if [[ $VERSION == 'major' ]]
 then
   echo "VNUM1 is : $VNUM1"
+  VNUM1_PARTS=(${VNUM1//v/})
+  echo "VNUM parts : ${VNUM1_PARTS[0]} , ${VNUM1_PARTS[1]} "
   VNUM1=v$((VNUM1+1))
 elif [[ $VERSION == 'minor' ]]
 then
