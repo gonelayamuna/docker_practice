@@ -1,15 +1,5 @@
 #!/bin/bash
-
-VERSION=""
-
-# get parameters
-# while getopts v: flag
-# do
-#   case "${flag}" in
-#     v) VERSION=${OPTARG};;
-#   esac
-# done
-
+VERSION=''
 VERSION=$1
 
 # get highest tag number, and add v0.1.0 if doesn't exist
