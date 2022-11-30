@@ -8,7 +8,7 @@ CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
 if [[ $CURRENT_VERSION == '' ]]
 then
-  CURRENT_VERSION='image1.0'
+  CURRENT_VERSION='image0.0'
 fi
 echo "Current Version: $CURRENT_VERSION"
 
@@ -41,7 +41,7 @@ else
 fi
 
 # create new tag
-NEW_TAG="image-$VNUM1.$VNUM2"
+NEW_TAG="image$VNUM1.$VNUM2"
 echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 
 # get current hash and see if it already has a tag
