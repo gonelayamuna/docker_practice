@@ -30,12 +30,16 @@ jobs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
+      
+    - name: Extract Git Tag
+      run: echo "GIT_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
+        # IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: ${{ env.GIT_TAG }}
       run: |
         # Build a docker container and
         # push it to ECR so that it can
