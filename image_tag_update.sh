@@ -29,8 +29,6 @@ CURRENT_VERSION_PARTS=(${CURRENT_VERSION//./ })
 VNUM1=${CURRENT_VERSION_PARTS[0]}
 VNUM2=${CURRENT_VERSION_PARTS[1]}
 #VNUM3=${CURRENT_VERSION_PARTS[2]}
-echo "Major : $VNUM1"
-echo "Minor : $VNUM2"
 if [[ $VERSION == 'major' ]]
 then
   echo "VNUM1 is : $VNUM1"
@@ -43,6 +41,7 @@ elif [[ $VERSION == 'minor' ]]
 then
   #VNUM2=$((VNUM2+1))
   echo "Maintain minor as 0 default"
+  $VNUM2=0
 # elif [[ $VERSION == 'patch' ]]
 # then
 #   VNUM3=$((VNUM3+1))
