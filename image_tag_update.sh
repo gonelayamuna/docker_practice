@@ -18,7 +18,7 @@ CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
 if [[ $CURRENT_VERSION == '' ]]
 then
-  CURRENT_VERSION='v1.0'
+  CURRENT_VERSION='image1.0'
 fi
 echo "Current Version: $CURRENT_VERSION"
 
@@ -41,7 +41,8 @@ then
   echo "Latest VNUM1 is : $VNUM1"
 elif [[ $VERSION == 'minor' ]]
 then
-  VNUM2=$((VNUM2+1))
+  #VNUM2=$((VNUM2+1))
+  echo "Maintain minor as 0 default"
 # elif [[ $VERSION == 'patch' ]]
 # then
 #   VNUM3=$((VNUM3+1))
