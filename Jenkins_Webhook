@@ -13,7 +13,7 @@ pipeline{
             steps{
                 
                 sh '''
-                    echo "This is testing in the conatiner"
+                    
                     echo "This job is testing webhooks integartion"
                 '''
             }
