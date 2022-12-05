@@ -14,7 +14,7 @@ pipeline{
                 
                 sh '''
                     
-                    echo "This job is testing webhooks"
+                    echo "This job is testing webhook"
                 '''
             }
         }
