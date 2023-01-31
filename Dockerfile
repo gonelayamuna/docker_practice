@@ -2,9 +2,9 @@ FROM ubuntu
 # updating the repo
 RUN apt-get update -y
 # Installing the java
-#RUN apt-get install openjdk-8-jdk -y
-RUN apt-get install java-1.8.0-openjdk
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0./jre
+RUN apt-get install openjdk-8-jdk -y
+#RUN apt-get install java-1.8.0-openjdk
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 # Installing the git
 #RUN apt-get install git -y
 # Installing python
