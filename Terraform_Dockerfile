@@ -1,0 +1,21 @@
+FROM ubuntu:20.04
+RUN apt-get update \
+	&& apt-get install -y curl unzip jq
+RUN apt-get install -y ca-certificates wget
+#Terraform latest version
+ARG TF_VERSION=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform)
+ARG TF_Latest= ${TF_VERSION} | jq -r -M '.current_version'
+RUN echo ${TF_Latest}
+# Download the latest Terraform binary
+RUN curl -LO https://releases.hashicorp.com/terraform/$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r '.current_version')/terraform_$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r '.current_version')_linux_amd64.zip
+
+# Unzip the downloaded Terraform binary
+RUN unzip terraform_*.zip -d /usr/local/bin/
+
+# Set the PATH environment variable to include Terraform
+ENV PATH="/usr/local/bin:${PATH}"
+# Move to local bin
+#RUN mv terraform /usr/local/bin/
+# Check that it's installed
+RUN terraform --version
+RUN rm terraform_*.zip 
