@@ -57,6 +57,6 @@ jobs:
     - name: Software List
       run: |
         echo "Software Versions"
-        echo "Java Version is: ${{ senv.JAVA_VERSION }}"
+        echo "Java Version is: ${{ env.JAVA_VERSION }}"
         echo "Java Version is: ${{ steps.get_versions.outputs.java_version }}"
     
