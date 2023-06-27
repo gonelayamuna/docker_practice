@@ -64,10 +64,9 @@ jobs:
     
     - id: env-setup
       run: |
-        {
-          "env_token=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)"
-          "env_domain=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)"
-        } >> $GITHUB_OUTPUT
+        
+          echo "env_token=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_OUTPUT
+          echo "env_domain=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_OUTPUT
 
         {
           echo "### Workflow variables"
