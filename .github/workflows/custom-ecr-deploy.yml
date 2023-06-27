@@ -54,7 +54,7 @@ jobs:
         versions=$(docker run --rm $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
         echo "::set-output name=Java ::$versions"
     -name: Software List
-     run: |
+      run: |
         echo "Java Version is : ${{ steps.fet_versions.outputs.Java }}"
     - name: Save state
       run: echo "{Version}=$versions" >> $GITHUB_STATE
