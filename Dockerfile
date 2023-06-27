@@ -16,10 +16,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 #RUN ln -s /usr/bin/python3.8 /usr/bin/python
 # installing maven
 RUN apt-get install -y curl
-ARG MAVEN_VERSION=3.3.9
+ARG MAVEN_VERSION=3.8.8
 ARG USER_HOME_DIR="/root"
 #ARG SHA=f790857f3b1f90ae8d16281f902c689e4f136ebe584aba45e4b1fa66c80cba826d3e0e52fdd04ed44b4c66f6d3fe3584a057c26dfcac544a60b301e6d0f91c26
-ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ARG BASE_URL=https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
@@ -27,7 +27,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && rm -f /tmp/apache-maven.tar.gz \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
-ENV MAVEN_HOME /opt/apache-maven-3.3.9
+ENV MAVEN_HOME /opt/apache-maven-{MAVEN_VERSION}
 #ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 #RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 #RUN apt-get install -y nodejs
