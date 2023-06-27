@@ -49,8 +49,7 @@ jobs:
         IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
       run: |
         echo "Installed software list"
-        docker images
-        docker container -ps -aq
+        docker container -aq
         docker run -d --name $ECR_REPOSITORY-$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker wait $ECR_REPOSITORY-$IMAGE_TAG
         docker exec $ECR_REPOSITORY-$IMAGE_TAG sh -c "dpkg -l" > softwarelist.txt
