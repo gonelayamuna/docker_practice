@@ -34,3 +34,5 @@ ENV MAVEN_HOME /opt/apache-maven-3.3.9
 
 # Get all softwares
 RUN dpkg -l | aqk '/^ii/ {printf "%s %s\n", $2, $3}' | column -t
+
+#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
