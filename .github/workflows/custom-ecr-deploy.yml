@@ -51,5 +51,10 @@ jobs:
         echo "Installed software list"
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         versions=$(docker run --rm $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
-        echo "::set-output name=Version::$versions"
+        echo "Version::$versions"
+      - name: Save state
+        run: echo "{Version}=${versions}" >> $GITHUB_STATE
+
+      - name: Set output
+        run: echo "{Version}=${versions}" >> $GITHUB_OUTPUT
         
