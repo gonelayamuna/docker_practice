@@ -33,6 +33,6 @@ ENV MAVEN_HOME /opt/apache-maven-{MAVEN_VERSION}
 #RUN apt-get install -y nodejs
 
 # Get all softwares
-RUN dpkg -l | awk '/^ii/ {printf "%s %s\n", $2, $3}' | column -t
+RUN dpkg -l | awk '/^ii/ {printf "%s %s\n", $2, $3}'
 
 #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
