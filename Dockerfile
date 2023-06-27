@@ -31,3 +31,6 @@ ENV MAVEN_HOME /opt/apache-maven-3.3.9
 #ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 #RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 #RUN apt-get install -y nodejs
+
+# Get all softwares
+RUN dpkg -l | aqk '/^ii/ {printf "%s %s\n", $2, $3}' | column -t

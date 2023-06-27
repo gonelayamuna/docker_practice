@@ -18,7 +18,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+        # role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.DHANYA_ACCESS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DHANYA_SECRET_KEY }}
         role-duration-seconds: 900 # the ttl of the session, in seconds.
         aws-region: ap-south-1
 
@@ -40,3 +42,15 @@ jobs:
         echo $IMAGE_TAG
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    - name : Display pkg list
+      env: 
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: custom-tools
+        IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+      run: |
+        echo "Installed software list"
+        docker run -d --name $ECR_REPOSITORY-$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker wait $ECR_REPOSITORY-$IMAGE_TAG
+        docker exec $ECR_REPOSITORY-$IMAGE_TAG sh -c "dpkg -l" > softwarelist.txt
+        cat softwarelist.txt
+        
