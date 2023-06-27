@@ -43,6 +43,7 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
     - name : Display pkg list
+      id: get_versions
       env: 
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: custom-tools
@@ -51,7 +52,10 @@ jobs:
         echo "Installed software list"
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         versions=$(docker run --rm $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
-        echo "Version::$versions"
+        echo "::set-output name=Java ::$versions"
+    -name: Software List
+     run: |
+        echo "Java Version is : ${{ steps.fet_versions.outputs.Java }}"
     - name: Save state
       run: echo "{Version}=$versions" >> $GITHUB_STATE
 
