@@ -50,5 +50,6 @@ jobs:
       run: |
         echo "Installed software list"
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker inspect --format='{{.Config.Labels}} $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG'
+        versions=$(docker run --rm $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
+        echo "Version is : $versions"
         
