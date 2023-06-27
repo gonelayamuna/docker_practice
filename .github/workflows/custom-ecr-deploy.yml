@@ -55,8 +55,6 @@ jobs:
         echo ":: set-output name=JAVA_VERSION::$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)"
         echo "VERSION1=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_ENV
         # echo "java_version=${java_version}" >> $GITHUB_ENV
-      run: |
-        echo "${{ steps.get_versions.outputs.JAVA_VERSION }}"
     - name: Software List
       run: |
         echo "Software Versions"
@@ -64,3 +62,20 @@ jobs:
         echo "Java Version is: ${{ env.JAVA_VERSION }}"
         echo "Java Version is: ${{ steps.get_versions.outputs.java_version }}"
     
+    - id: env-setup
+      run: |
+        {
+          "env_token=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)"
+          "env_domain=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)"
+        } >> $GITHUB_OUTPUT
+
+        {
+          echo "### Workflow variables"
+          echo "| Variable   | Value       |"
+          echo "| ---------- | ----------- |"
+          echo "| env_token  | $env_token  |"
+          echo "| env_domain | $env_domain |"
+        } >> $GITHUB_STEP_SUMMARY
+    - run: |
+        echo "${{ steps.env-setup.outputs.env_token }}"
+        echo "${{ steps.env-setup.outputs.env_domain }}"
