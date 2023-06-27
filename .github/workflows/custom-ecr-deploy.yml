@@ -55,5 +55,5 @@ jobs:
     - name: Software List
       run: |
         echo "Software Versions"
-        echo "Java Version is : $java_version"
+        echo "Java Version is: ${{ env.java_version }}"
     
