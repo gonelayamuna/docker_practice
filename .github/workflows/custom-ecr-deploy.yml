@@ -49,13 +49,14 @@ jobs:
         ECR_REPOSITORY: custom-tools
         IMAGE_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
       run: |
+        set -x
         echo "Installed software list"
-        docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        # docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         java_version=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
         echo "java_version=${java_version}" >> $GITHUB_ENV
         >> $GITHUB_ENV
     - name: Software List
       run: |
         echo "Software Versions"
-        echo "Java Version is: ${{ env.java_version }}"
+        echo "Java Version is: ${{ steps.get_versions.outputs.java_version }}"
     
