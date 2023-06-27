@@ -51,14 +51,9 @@ jobs:
       run: |
         echo "Installed software list"
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        versions=$(docker run --rm $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
-        echo "::set-output name=Java ::$versions"
+        echo "java_version=$(docker run --entrypoint=java_version $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version) >> $GITHUB_ENV
     - name: Software List
       run: |
-        echo "Java Version is : ${{ steps.fet_versions.outputs.Java }}"
-    - name: Save state
-      run: echo "{Version}=$versions" >> $GITHUB_STATE
-
-    - name: Set output
-      run: echo "{Version}=$versions" >> $GITHUB_OUTPUT
-        
+        echo "Software Versions"
+        echo "Java Version is : $java_version"
+    
