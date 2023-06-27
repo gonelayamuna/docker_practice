@@ -51,7 +51,7 @@ jobs:
       run: |
         echo "Installed software list"
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "java_version=$(docker run --entrypoint=java_version $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version) >> $GITHUB_ENV
+        echo "java_version=$(docker run --entrypoint=java_version $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_ENV
     - name: Software List
       run: |
         echo "Software Versions"
