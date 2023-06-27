@@ -52,9 +52,9 @@ jobs:
         docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         versions=$(docker run --rm $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)
         echo "Version::$versions"
-      - name: Save state
+    - name: Save state
         run: echo "{Version}=${versions}" >> $GITHUB_STATE
 
-      - name: Set output
+    - name: Set output
         run: echo "{Version}=${versions}" >> $GITHUB_OUTPUT
         
