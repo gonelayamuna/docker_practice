@@ -19,8 +19,8 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         # role-to-assume: ${{ secrets.AWS_IAM_ROLE }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.DHANYA_ACCESS_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.DHANYA_SECRET_KEY }}
+        aws-access-key-id: ${{ secrets.DHANYA_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.DHANYA_SECRET_KEY }}
         role-duration-seconds: 900 # the ttl of the session, in seconds.
         aws-region: ap-south-1
 
