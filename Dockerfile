@@ -59,7 +59,10 @@ ARG NODE_PACKAGE=node-v${NODE_VERSION}-linux-x64
 ARG NODE_HOME=/opt/${NODE_PACKAGE}
 ENV NODE_PATH ${NODE_HOME}/lib/node_modules
 ENV PATH ${NODE_HOME}/bin:$PATH
-RUN curl https://nodejs.org/dist/v${NODE_VERSION}.tar.gz | tar -xzC /opt/
+# https://nodejs.org/dist/v18.16.1/node-v18.16.1.pkg
+# https://nodejs.org/dist/v18.16.1/node-v18.16.1-darwin-arm64.tar.gz
+# https://nodejs.org/dist/v18.16.1/node-v18.16.1-darwin-x64.tar.gz
+RUN curl https://nodejs.org/dist/v${NODE_VERSION}/${NODE_PACKAGE}.tar.gz | tar -xzC /opt/
 RUN npm install -g npm -y
 RUN node --version
 RUN npm --version
