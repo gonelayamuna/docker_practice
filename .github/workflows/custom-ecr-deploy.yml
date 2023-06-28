@@ -60,7 +60,7 @@ jobs:
         echo "AWS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG aws --version | head -n 1 | awk '{print $1}' | cut -d '/' -f2)" >> $GITHUB_ENV
         echo "REQUESTS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep requests | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
         echo "PANDAS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list  | grep pandas | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
-        echo "OPNEPYXL_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep openpy | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
+        echo "OPNEPYXL_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep openpyxl | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
         echo "PDFKIT_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep pdfkit | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
         echo "GIT_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG git --version 2>&1 | head -n 1 | awk '{print $3}')" >> $GITHUB_ENV
         echo "CURL_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG curl --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
@@ -68,7 +68,7 @@ jobs:
         echo "ZIP_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG zip -v 2>&1 | sed -n '2 p' | awk '{print $4}')" >> $GITHUB_ENV
         echo "JQ_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG jq --version 2>&1 | cut -d '-' -f2)" >> $GITHUB_ENV
         echo "WGET_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG wget --version 2>&1 | head -n 1  | awk '{print $3}')" >> $GITHUB_ENV
-        echo "SERVERLESS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG serverless -v 2>&1 | head -n 1  | awk '{print $3}')" >> $GITHUB_ENV
+        echo "SERVERLESS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG serverless -v 2>&1)" >> $GITHUB_ENV
         
     - name: Software List
       id: software_list
