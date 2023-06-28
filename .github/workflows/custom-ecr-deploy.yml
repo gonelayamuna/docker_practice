@@ -65,8 +65,8 @@ jobs:
           set -x
           const version1=`$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)`;
           const version2=`$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -v)`;
-          core.setOutput('Version1', version1);
-          core.setOutput('Version2', version2);
+          # core.setOutput('Version1', version1);
+          # core.setOutput('Version2', version2);
     - name: Software List
       run: |
         echo "Software Versions"
