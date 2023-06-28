@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:20.04
 # updating the repo
 RUN apt-get update -y
 # Installing the java
