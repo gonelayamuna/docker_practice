@@ -52,11 +52,11 @@ jobs:
         set -x
         echo "Installed software list"
         # docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo ":: set-output name=JAVA_VERSION::$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_STEP_SUMMARY
-        echo "VERSION1=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_STEP_SUMMARY
+        echo ":: set-output name=JAVA_VERSION::$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1)" >> $GITHUB_STEP_SUMMARY
+        echo "VERSION1=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1)" >> $GITHUB_STEP_SUMMARY
         echo "java_version=${VERSION1}" >> $GITHUB_STEP_SUMMARY
         echo "JAVA=$JAVA_VERSION" >> $GITHUB_STEP_SUMMARY
-        `$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)` >> $GITHUB_STEP_SUMMARY
+        `$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1)` >> $GITHUB_STEP_SUMMARY
     # - name: Extract List
     #   id: extract_versions
     #   uses: actions/github-script@v4
@@ -73,3 +73,11 @@ jobs:
         echo "Java Version is: ${{ env.VERSION1 }}"
         echo "Java Version is: ${{ steps.get_verions.outputs.JAVA_VERSION }}"
         echo "```${{ steps.get_versions.outputs.JAVA_VERSION }}```"
+        {
+          echo "### :rocket: Workflow Output"
+          echo "| Arg                 | Value |"
+          echo "| ------------------- | ----- |"
+          echo "| Print Java        | ${{ inputs.print-inputs }} |"
+          echo "| Environment         | ${{ inputs.environment }} |"
+          echo "| Cluster             | ${{ inputs.cluster }} |"
+        } >> $GITHUB_STEP_SUMMARY
