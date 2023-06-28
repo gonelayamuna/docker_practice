@@ -72,4 +72,4 @@ jobs:
         echo "Software Versions"
         echo "Java Version is: ${{ env.VERSION1 }}"
         echo "Java Version is: \${{ steps.get_verions.outputs.JAVA_VERSION }}"
-        echo "```${{ steps.get_versions.outputs.JAVA_VERSION }}```"
+        echo "${{ steps.get_versions.outputs.JAVA_VERSION }}"
