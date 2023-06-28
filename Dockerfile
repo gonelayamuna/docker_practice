@@ -28,5 +28,20 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 ENV MAVEN_HOME /opt/apache-maven-{MAVEN_VERSION}
-RUN mvn -v
+
+#python installation
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get install -y software-properties-common && \
+  add-apt-repository -y universe && \
+  apt-get update && \
+  apt-get install -y python3.9
+RUN unlink /usr/bin/python3
+RUN ln -s /usr/bin/python3.9 /usr/bin/python
+RUN ln -s /usr/bin/python3.9 /usr/bin/python3
+
+RUN apt-get install -y python3.9-distutils
+
+RUN apt-get install -y python3-pip
+RUN python --version
+RUN pip --version
 #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
