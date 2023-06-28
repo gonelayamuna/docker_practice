@@ -54,11 +54,21 @@ jobs:
         echo "JAVA_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
         echo "MAVEN_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -version 2>&1 | head -n 1 | awk '{print $3}')" >> $GITHUB_ENV
         echo "PYTHON_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG python --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
+        echo "NODE_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG node --version | cut -d 'v' -f2)" >> $GITHUB_ENV
+        echo "NPM_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG npm -version 2>&1)" >> $GITHUB_ENV
         echo "PIP_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
         echo "AWS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG aws --version | head -n 1 | awk '{print $1}' | cut -d '/' -f2)" >> $GITHUB_ENV
-
+        echo "REQUESTS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep requests | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
+        echo "PANDAS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep pandas | head -n 1 | awk '{print $1}')" >> $GITHUB_ENV
+        echo "OPNEPYXL_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep openpy | head -n 1 | awk '{print $1}')" >> $GITHUB_ENV
+        echo "PDFKIT_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip3 list | grep pdfkit | head -n 1 | awk '{print $1}')" >> $GITHUB_ENV
+        echo "GIT_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG git --version 2>&1 | head -n 1 | awk '{print $3}')" >> $GITHUB_ENV
         echo "CURL_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG curl --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
-       
+        echo "UNZIP_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG unzip -v 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
+        echo "ZIP_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG zip -v 2>&1 | sed -n '2 p' | awk '{print $4}')" >> $GITHUB_ENV
+        echo "JQ_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG jq --version | cut -d '-' -f2)" >> $GITHUB_ENV
+        echo "WGET_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG wget --version | head -n 1  | awk '{print $3}')" >> $GITHUB_ENV
+        
     - name: Software List
       id: software_list
       run: |
@@ -69,14 +79,36 @@ jobs:
         echo "Pip Version is: ${{ env.PIP_VERSION }}"
         echo "AWS Version is: ${{ env.AWS_VERSION }}"
         echo "Curl Version is: ${{ env.CURL_VERSION }}"
+        echo "Requests Version is: ${{ env.REQUESTS_VERSION }}"
+        echo "Pandas Version is: ${{ env.PANDAS_VERSION }}"
+        echo "Openpyxl Version is: ${{ env.OPNEPYXL_VERSION }}"
+        echo "Pdfkit Version is: ${{ env.PDFKIT_VERSION }}"
+        echo "Git Version is: ${{ env.GIT_VERSION }}"
+        echo "Unzip Version is: ${{ env.UNZIP_VERSION }}"
+        echo "Zip Version is: ${{ env.ZIP_VERSION }}"
+        echo "JQ Version is: ${{ env.JQ_VERSION }}"
+        echo "WGET Version is: ${{ env.WGET_VERSION }}"
+        echo "NODE Version is: ${{ env.NODE_VERSION }}"
         {
           echo "### :rocket: Workflow Output"
           echo "| Package                 | Version |"
           echo "| ------------------- | ----- |"
           echo "| Java        | ${{ env.JAVA_VERSION }} |"
           echo "| Python         | ${{ env.PYTHON_VERSION }} |"
+          echo "| NodeJs         | ${{ env.NODE_VERSION }} |"
+          echo "| Npm         | ${{ env.NPM_VERSION }} |"
           echo "| Pip         | ${{ env.PIP_VERSION }} |"
           echo "| AWS             | ${{ env.AWS_VERSION }} |"
           echo "| Maven             | ${{ env.MAVEN_VERSION }} |"
+          echo "| Git             | ${{ env.GIT_VERSION }} |"
           echo "| Curl             | ${{ env.CURL_VERSION }} |"
+          echo "| UnZip             | ${{ env.UNZIP_VERSION }} |"
+          echo "| Requests             | ${{ env.REQUESTS_VERSION }} |"
+          echo "| Pdfkit             | ${{ env.PDFKIT_VERSION }} |"
+          echo "| openpyxl             | ${{ env.OPNEPYXL_VERSION }} |"
+          echo "| pandas             | ${{ env.PANDAS_VERSION }} |"
+          echo "| Zip             | ${{ env.ZIP_VERSION }} |"
+          echo "| Unzip             | ${{ env.UNZIP_VERSION }} |"
+          echo "| JQ             | ${{ env.JQ_VERSION }} |"
+          echo "| WGET             | ${{ env.WGET_VERSION }} |"
         } >> $GITHUB_STEP_SUMMARY
