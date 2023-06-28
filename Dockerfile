@@ -15,7 +15,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
    # apt install -y python3.8
 #RUN ln -s /usr/bin/python3.8 /usr/bin/python
 # installing maven
-RUN apt-get install -y curl
+RUN apt-get install -y curl unzip
 ARG MAVEN_VERSION=3.8.8
 ARG USER_HOME_DIR="/root"
 #ARG SHA=f790857f3b1f90ae8d16281f902c689e4f136ebe584aba45e4b1fa66c80cba826d3e0e52fdd04ed44b4c66f6d3fe3584a057c26dfcac544a60b301e6d0f91c26
@@ -42,6 +42,13 @@ RUN ln -s /usr/bin/python3.9 /usr/bin/python3
 RUN apt-get install -y python3.9-distutils
 
 RUN apt-get install -y python3-pip
-RUN python --version
-RUN pip --version
+
+
+#aws cli installation
+RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip \
+  && unzip awscliv2.zip \
+  && ./aws/install \
+  && rm -rf aws awscliv2.zip
+
+
 #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

@@ -54,20 +54,11 @@ jobs:
         echo "JAVA_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
         echo "MAVEN_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -version 2>&1 | head -n 1 | awk '{print $3}')" >> $GITHUB_ENV
         echo "PYTHON_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG python --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
-       echo "PIP_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
-       
+        echo "PIP_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG pip --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
+        echo "AWS_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG aws --version | head -n 1 | awk '{print $1}' | cut -d '/' -f2)" >> $GITHUB_ENV
+
         echo "CURL_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG curl --version 2>&1 | head -n 1 | awk '{print $2}')" >> $GITHUB_ENV
        
-    # - name: Extract List
-    #   id: extract_versions
-    #   uses: actions/github-script@v4
-    #   with:
-    #     script: |
-    #       set -x
-    #       const version1=`$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)`;
-    #       const version2=`$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -v)`;
-    #       # core.setOutput('Version1', version1);
-    #       # core.setOutput('Version2', version2);
     - name: Software List
       id: software_list
       run: |
@@ -76,6 +67,7 @@ jobs:
         echo "Maven Version is: ${{ env.MAVEN_VERSION }}"
         echo "Python Version is: ${{ env.PYTHON_VERSION }}"
         echo "Pip Version is: ${{ env.PIP_VERSION }}"
+        echo "AWS Version is: ${{ env.AWS_VERSION }}"
         echo "Curl Version is: ${{ env.CURL_VERSION }}"
         {
           echo "### :rocket: Workflow Output"
@@ -84,6 +76,7 @@ jobs:
           echo "| Java        | ${{ env.JAVA_VERSION }} |"
           echo "| Python         | ${{ env.PYTHON_VERSION }} |"
           echo "| Pip         | ${{ env.PIP_VERSION }} |"
+          echo "| AWS             | ${{ env.AWS_VERSION }} |"
           echo "| Maven             | ${{ env.MAVEN_VERSION }} |"
           echo "| Curl             | ${{ env.CURL_VERSION }} |"
         } >> $GITHUB_STEP_SUMMARY
