@@ -51,15 +51,10 @@ jobs:
       run: |
         set -x
         echo "Installed software list"
-        # docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo ":: set-output name=JAVA_VERSION::$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1)" >> $GITHUB_STEP_SUMMARY
-        echo "VERSION1=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
-        echo "java_version=${VERSION1}" >> $GITHUB_STEP_SUMMARY
-        echo "JAVA=$JAVA_VERSION" >> $GITHUB_STEP_SUMMARY
+        echo "JAVA_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
+        echo "MAVEN_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -v 2>&1" >> $GITHUB_ENV
+        echo "Java Version is : ${{ env.JAVA_VERSION }}"
 
-        echo "OUTPUT=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version | grep -oP 'java version "\K[^"]+' 2>&1)" >> $GITHUB_OUTPUT
-        echo "::set-output name=JAVA::$OUTPUT"
-        echo "${{ env.VERSION1 }}"
     # - name: Extract List
     #   id: extract_versions
     #   uses: actions/github-script@v4
@@ -74,13 +69,12 @@ jobs:
       id: software_list
       run: |
         echo "Software Versions"
-        echo "Java Version is: ${{ env.VERSION1 }}"
-        echo "Java Version is: ${{ steps.get_versions.outputs.JAVA_VERSION }}"
+        echo "Java Version is: ${{ env.JAVA_VERSION }}"
         {
           echo "### :rocket: Workflow Output"
           echo "| Package                 | Version |"
           echo "| ------------------- | ----- |"
-          echo "| Java        | ${{ steps.get_versions.outputs.OUTPUT }} |"
+          echo "| Java        | ${{ env.JAVA_VERSION }} |"
           echo "| Python         | ${{ steps.get_versions.outputs.output }} |"
-          echo "| Maven             | ${{ env.VERSION1 }} |"
+          echo "| Maven             | ${{ env.MAVEN_VERSION }} |"
         } >> $GITHUB_STEP_SUMMARY
