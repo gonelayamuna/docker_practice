@@ -29,5 +29,4 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 ENV MAVEN_HOME /opt/apache-maven-{MAVEN_VERSION}
 RUN mvn -v
-RUN mvn -v | head -n 1 | awk -F '"' '{print $2}'
 #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

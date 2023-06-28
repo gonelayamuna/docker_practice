@@ -52,7 +52,7 @@ jobs:
         set -x
         echo "Installed software list"
         echo "JAVA_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
-        echo "MAVEN_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -v 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
+        echo "MAVEN_VERSION=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -version 2>&1 | head -n 1 | awk -F '"' '{print $2}')" >> $GITHUB_ENV
        
     # - name: Extract List
     #   id: extract_versions
