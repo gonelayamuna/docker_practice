@@ -56,9 +56,18 @@ jobs:
         echo "VERSION1=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_STEP_SUMMARY
         echo "java_version=${VERSION1}" >> $GITHUB_STEP_SUMMARY
         `$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)` >> $GITHUB_STEP_SUMMARY
+    - name: Extract List
+      id: extract_versions
+      with: actions/github-script@v4
+        script: |
+          set -x
+          const version1=`$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)`;
+          const version2=`$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG mvn -v)`;
+          core.setOutput('Version1', version1);
+          core.setOutput('Version2', version2);
     - name: Software List
       run: |
         echo "Software Versions"
         echo "Java Version is: ${{ env.VERSION1 }}"
         echo "Java Version is: ${{ env.JAVA_VERSION }}"
-        echo "Java Version is: ${{ steps.get_versions.outputs.java_version }}"
+        echo "Java Version is: ${{ steps.extract_versions.outputs.java_version1 }}"
