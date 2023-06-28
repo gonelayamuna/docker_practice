@@ -72,7 +72,6 @@ jobs:
     #       # core.setOutput('Version2', version2);
     - name: Software List
       id: software_list
-      uses: actions/software_list@v1
       with:
         tag_name: ${{ steps.get_versions.outputs.TAG_NAME }}
       run: |
