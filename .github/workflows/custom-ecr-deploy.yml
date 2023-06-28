@@ -55,6 +55,7 @@ jobs:
         echo ":: set-output name=JAVA_VERSION::$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_STEP_SUMMARY
         echo "VERSION1=$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)" >> $GITHUB_STEP_SUMMARY
         echo "java_version=${VERSION1}" >> $GITHUB_STEP_SUMMARY
+        echo "JAVA=$JAVA_VERSION" >> $GITHUB_STEP_SUMMARY
         `$(docker run $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG java -version)` >> $GITHUB_STEP_SUMMARY
     - name: Extract List
       id: extract_versions
@@ -71,4 +72,4 @@ jobs:
         echo "Software Versions"
         echo "Java Version is: ${{ env.VERSION1 }}"
         echo "Java Version is: ${{ env.JAVA_VERSION }}"
-        echo "Java Version is: ${{ steps.extract_versions.outputs.java_version1 }}"
+        echo "Java Version is: ${{ steps.extract_versions.outputs.version1 }}"
