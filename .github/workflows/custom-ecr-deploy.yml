@@ -72,8 +72,6 @@ jobs:
     #       # core.setOutput('Version2', version2);
     - name: Software List
       id: software_list
-      with:
-        tag_name: ${{ steps.get_versions.outputs.TAG_NAME }}
       run: |
         echo "Software Versions"
         echo "Java Version is: ${{ steps.get_versions.outputs.VERSION1 }}"
